@@ -4,6 +4,8 @@ import { MongoClient, ObjectId } from "mongodb";
 
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
+const MONGO_URL = process.env.MONGO_URL;
+
 function MeetupDetails(props) {
   return (
     <Fragment>
@@ -21,9 +23,7 @@ function MeetupDetails(props) {
   );
 }
 export async function getStaticPaths() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://admin-aya1506:Taiyou0127@cluster0.emooi.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(MONGO_URL);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
@@ -40,8 +40,6 @@ export async function getStaticPaths() {
       },
     })),
   };
-
-  x;
 }
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId; //inside of []

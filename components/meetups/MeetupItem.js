@@ -15,7 +15,7 @@ function MeetupItem(props) {
           <img src={props.image} alt={props.title} />
         </div>
         <div className={classes.content}>
-          <h3>{props.title}</h3>
+          <h2>{props.title}</h2>
           <address>{props.address}</address>
         </div>
         <div className={classes.actions}>
