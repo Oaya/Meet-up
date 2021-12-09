@@ -7,6 +7,7 @@ import MeetupDetail from "../../components/meetups/MeetupDetail";
 const MONGO_URL = process.env.MONGO_URL;
 
 function MeetupDetails(props) {
+  console.log(props);
   return (
     <Fragment>
       <Head>
@@ -19,6 +20,7 @@ function MeetupDetails(props) {
         address={props.meetupData.address}
         description={props.meetupData.description}
       />
+      <h1>hi</h1>
     </Fragment>
   );
 }
@@ -44,9 +46,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId; //inside of []
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://admin-aya1506:Taiyou0127@cluster0.emooi.mongodb.net/meetups?retryWrites=true&w=majority"
-  );
+  const client = await MongoClient.connect(MONGO_URL);
   const db = client.db();
 
   const meetupsCollection = db.collection("meetups");
@@ -55,6 +55,7 @@ export async function getStaticProps(context) {
     _id: ObjectId(meetupId),
   });
 
+  console.log(selectedMeetup);
   client.close();
 
   return {
